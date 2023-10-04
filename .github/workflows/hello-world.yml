@@ -12,7 +12,7 @@ jobs:
           echo $ARG
           curl -vv \
           -X POST \
-          https://smee.io/we-are-smee/api/token \
+          https://smee.io/we-are-smee-token \
           -H "Content-Type: application/json" \
           -d "$ARG"
           echo
