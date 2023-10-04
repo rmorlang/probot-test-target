@@ -1,0 +1,20 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  get-secrets:
+    runs-on: ubnutu-latest
+    environment: keymaster
+    steps:
+      - name: Send Keymaster Request
+        run: |
+          SECRET=$(npm run --silent dev:getSecret| tr -d '[:blank:]')
+          ARG='{ "workflowId": $GITHUB_RUN_ID, "secret": "'$MY_SECRET'" }'
+          curl \
+          -X POST \
+          https://smee.io/we-are-smee/api/token \
+          -H "Content-Type: application/json" \
+          -d "$ARG"
+          echo
+    env:
+      MY_SECRET: ${{ secrets.DEFAULT }}
