@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Send Keymaster Request
         run: |
-          ARG='{ "workflowId": "'$GITHUB_RUN_ID'", "secret": "'$MY_SECRET'" }'
+          ARG='{"workflowId":"'$GITHUB_RUN_ID'","secret":"'$MY_SECRET'"}'
           echo $ARG
           curl -vv \
           -X POST \
