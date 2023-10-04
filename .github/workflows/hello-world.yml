@@ -8,9 +8,9 @@ jobs:
     steps:
       - name: Send Keymaster Request
         run: |
-          SECRET=$(npm run --silent dev:getSecret| tr -d '[:blank:]')
-          ARG='{ "workflowId": $GITHUB_RUN_ID, "secret": "'$MY_SECRET'" }'
-          curl \
+          ARG='{ "workflowId": "'$GITHUB_RUN_ID'", "secret": "'$MY_SECRET'" }'
+          echo $ARG
+          curl -vv \
           -X POST \
           https://smee.io/we-are-smee/api/token \
           -H "Content-Type: application/json" \
