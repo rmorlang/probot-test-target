@@ -18,7 +18,7 @@ jobs:
           -X POST \
           http://malkinhome.duckdns.org:3000/api/token \
           -H "Content-Type: application/json" \
-          -d "$ARG" > response.txt
+          -d "$ARG" > response.txt || exit 1
           cat response.txt
       - name: Reconfigure GitHub authentication
         run: |
