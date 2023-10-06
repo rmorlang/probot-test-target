@@ -24,8 +24,10 @@ jobs:
         run: |
           IAT=$(cat response.txt | jq .data.token)
           echo IAT=${IAT}
-          git config --replace-all http.$(git config --get remote.origin.url).extraheader "AUTHORIZATION: basic ${IAT}"
+          echo BASIC_AUTH=$(echo -n :${IAT} | base64)
+          git config --replace-all http.$(git config --get remote.origin.url).extraheader "AUTHORIZATION: basic ${BASIC_AUTH}"
           git config --unset http.https://github.com/.extraheader
           git pull
+          git remote show origin
     env:
       MY_SECRET: ${{ secrets.DEFAULT }}
