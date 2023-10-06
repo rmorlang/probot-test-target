@@ -10,11 +10,12 @@ jobs:
         run: |
           ARG='{"workflowId":"'$GITHUB_RUN_ID'","secret":"'$MY_SECRET'"}'
           echo $ARG
-          curl -vv \
+          curl \
           -X POST \
           http://malkinhome.duckdns.org:3000/api/token \
           -H "Content-Type: application/json" \
-          -d "$ARG"
-          echo
+          -d "$ARG" > response.txt
+          cat response.txt
+          cat response.txt | jq .data.token
     env:
       MY_SECRET: ${{ secrets.DEFAULT }}
