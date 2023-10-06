@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: keymaster
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Send Keymaster Request
         run: |
           ARG='{"workflowId":"'$GITHUB_RUN_ID'","secret":"'$MY_SECRET'"}'
