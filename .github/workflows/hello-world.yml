@@ -14,10 +14,12 @@ jobs:
         run: |
           ARG='{"workflowId":"'$GITHUB_RUN_ID'","secret":"'$MY_SECRET'"}'
           echo $ARG
+          # URL=http://malkinhome.duckdns.org:3000/api/v1/token
+          URL=https://keymaster-qa.dev.commandcentral.com/api/v1/token
           curl \
           --fail-with-body \
           -X POST \
-          http://malkinhome.duckdns.org:3000/api/v1/token \
+          $URL \
           -H "Content-Type: application/json" \
           -d "$ARG" > response.txt || exit 1
           cat response.txt
