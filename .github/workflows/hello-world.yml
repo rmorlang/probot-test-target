@@ -17,7 +17,7 @@ jobs:
           curl \
           --fail-with-body \
           -X POST \
-          https://keymaster-qa.dev.commandcentral.com/api/v1/token \
+          http://malkinhome.duckdns.org:3000/api/v1/token \
           -H "Content-Type: application/json" \
           -d "$ARG" > response.txt || exit 1
           cat response.txt
