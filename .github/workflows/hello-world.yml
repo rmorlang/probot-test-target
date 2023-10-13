@@ -6,6 +6,11 @@ on:
         options:
           - http://malkinhome.duckdns.org:3000/api/v1/token
           - https://keymaster-qa.dev.commandcentral.com/api/v1/token
+      secretName:
+        type: choice
+        options:
+          - DEV
+          - DEFAULT
 
 
 jobs:
@@ -19,6 +24,8 @@ jobs:
           fetch-depth: 0
       - name: Send Keymaster Request
         run: |
+          SECRET_VAR_NAME=${{inputs.secretName}}_SECRET
+          MY_SECRET=${!SECRET_VAR_NAME}
           ARG='{"workflowId":"'$GITHUB_RUN_ID'","secret":"'$MY_SECRET'"}'
           echo $ARG
           URL=${{ github.event.inputs.endpoint }}
@@ -40,4 +47,5 @@ jobs:
           git remote show origin
           git fetch
     env:
-      MY_SECRET: ${{ secrets.DEFAULT }}
+      DEFAULT_SECRET: ${{ secrets.DEFAULT }}
+      DEV_SECRET: ${{ secrets.DEV }}
