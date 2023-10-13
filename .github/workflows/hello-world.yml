@@ -1,10 +1,11 @@
 on:
   workflow_dispatch:
-    endpoint:
-      type: choice
-      options:
-        - http://malkinhome.duckdns.org:3000/api/v1/token
-        - https://keymaster-qa.dev.commandcentral.com/api/v1/token
+    inputs:
+      endpoint:
+        type: choice
+        options:
+          - http://malkinhome.duckdns.org:3000/api/v1/token
+          - https://keymaster-qa.dev.commandcentral.com/api/v1/token
 
 
 jobs:
@@ -20,7 +21,7 @@ jobs:
         run: |
           ARG='{"workflowId":"'$GITHUB_RUN_ID'","secret":"'$MY_SECRET'"}'
           echo $ARG
-          URL=${{ github.event.inputs.url }}
+          URL=${{ github.event.inputs.endpoint }}
           curl \
           --fail-with-body \
           -X POST \
